@@ -13,9 +13,10 @@
 - 물 2L, 수면, 영양제 등 일일 체크리스트
 - 주간 운동 횟수 추적
 - 허용음식과 피해야 할 음식 정리
+- 실제로 먹기 쉬운 추천 메뉴 조합 추가
 - 영양제별 권장 타이밍 정리
 - 월간 캘린더에서 기록 흐름 확인
-- 몸무게, 허리둘레, 컨디션, 메모 저장
+- 몸무게, 컨디션, 메모 저장
 - 브라우저 `localStorage` 기반 개인 기록 유지
 - `manifest.json` + `sw.js`를 통한 간단한 웹앱 형태 지원
 
@@ -40,9 +41,9 @@
 3. 저장소 `Settings > Pages`에서 `Deploy from a branch` 선택
 4. `main` 브랜치의 `/ (root)` 배포
 
-배포 후에는 아래 형태의 주소로 접속할 수 있습니다.
+배포 후에는 아래 주소로 접속할 수 있습니다.
 
-`https://wcjfghk98.github.io/yarn-count-calculator/`
+`https://wcjfghk98.github.io/switchon-diet-companion/`
 
 ## 아이폰에서 쓰는 방법
 
@@ -57,5 +58,6 @@
 
 - https://namu.wiki/w/%EC%8A%A4%EC%9C%84%EC%B9%98%EC%98%A8%20%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8
 - https://www.eland.co.kr/mgzn/viewMgzn?mgznIdx=1077
+- https://news.hidoc.co.kr/news/articleView.html?idxno=16728
 
-의료 진단이나 치료를 대신하지 않으며, 어지럼이나 저혈당 느낌 등 이상 반응이 크면 중단하고 전문가와 상의하는 편이 안전합니다.
+의료 진단이나 치료를 대신하지 않으며, 어지럼이나 저혈당 느낌 등 이상 반응이 크면 중단하고 전문가와 상의하는 편이 안전합니다. 식단은 단기 이벤트보다 건강관리 루틴으로 이어가는 방향으로 정리했고, 무염까지 밀어붙이기보다 싱겁게 조리하는 현실적인 기준을 반영했습니다.
