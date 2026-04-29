@@ -1,4 +1,4 @@
-const CACHE_NAME = "switchon-diet-companion-v1";
+const CACHE_NAME = "switchon-diet-companion-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
   );
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
@@ -21,10 +22,33 @@ self.addEventListener("activate", (event) => {
       )
     )
   );
+  self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") {
+    return;
+  }
+
+  const requestUrl = new URL(event.request.url);
+  const isAppShellRequest =
+    requestUrl.pathname.endsWith("/switchon-diet-companion/") ||
+    requestUrl.pathname.endsWith("/switchon-diet-companion/index.html") ||
+    requestUrl.pathname.endsWith("/sw.js") ||
+    requestUrl.pathname.endsWith("/manifest.json");
+
+  if (isAppShellRequest) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const cloned = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("./index.html")))
+    );
     return;
   }
 
