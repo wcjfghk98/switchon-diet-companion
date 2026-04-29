@@ -558,6 +558,40 @@
       overflow-wrap: normal;
     }
 
+    .tracker-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 14px 15px;
+      border-radius: 16px;
+      background: rgba(243, 111, 69, 0.08);
+      border: 1px solid rgba(243, 111, 69, 0.12);
+    }
+
+    .tracker-check input {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+      flex: none;
+    }
+
+    .tracker-check strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .tracker-check span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
     .calendar-head {
       display: flex;
       justify-content: space-between;
@@ -1031,6 +1065,24 @@
             </div>
           </div>
 
+          <div class="tracker-card">
+            <div class="tracker-head">
+              <div>
+                <h3>이번 주 단식 횟수</h3>
+                <p class="helper" id="fastingWeekLabel">이번 주 범위를 불러오는 중입니다.</p>
+              </div>
+              <div class="tracker-value" id="fastingCount">0회</div>
+            </div>
+            <p class="tracker-note" id="fastingSummary">현재 주차에 맞는 단식 횟수를 여기서 바로 확인할 수 있습니다.</p>
+            <label class="tracker-check">
+              <input id="fastingDayCheck" type="checkbox" />
+              <span>
+                <strong>오늘은 24시간 단식일</strong>
+                <span id="fastingDayHint">단식하는 날에는 오늘 한 번만 체크해 두면 이번 주 누적 횟수에 바로 반영됩니다.</span>
+              </span>
+            </label>
+          </div>
+
           <div class="meal-grid" id="mealGrid"></div>
 
           <div class="panel-head" style="margin-top: 18px;">
@@ -1439,6 +1491,11 @@
       previousMealTime: document.getElementById("previousMealTime"),
       fastingDuration: document.getElementById("fastingDuration"),
       fastingNote: document.getElementById("fastingNote"),
+      fastingWeekLabel: document.getElementById("fastingWeekLabel"),
+      fastingCount: document.getElementById("fastingCount"),
+      fastingSummary: document.getElementById("fastingSummary"),
+      fastingDayCheck: document.getElementById("fastingDayCheck"),
+      fastingDayHint: document.getElementById("fastingDayHint"),
       exerciseWeekLabel: document.getElementById("exerciseWeekLabel"),
       exerciseCount: document.getElementById("exerciseCount"),
       exerciseSummary: document.getElementById("exerciseSummary"),
@@ -1640,6 +1697,65 @@
 
     function getCurrentWeekExerciseCount() {
       return state.weeklyExercise[getWeekKey()] || 0;
+    }
+
+    function getCurrentWeekFastingCount(dateKey = getTodayKey()) {
+      const weekStart = getWeekStartDate(dateKey);
+      let count = 0;
+
+      for (let index = 0; index < 7; index += 1) {
+        const current = new Date(weekStart);
+        current.setDate(weekStart.getDate() + index);
+        const key = formatDate(current);
+        if (state.logs[key]?.checks?.["fasting-day"]) {
+          count += 1;
+        }
+      }
+
+      return count;
+    }
+
+    function getFastingGoal(stageInfo) {
+      if (!stageInfo || stageInfo.status === "before-start") {
+        return {
+          target: 0,
+          label: "아직 단식 계획 없음",
+          note: "시작 전에는 식사 시간대를 먼저 안정적으로 맞추는 쪽이 좋습니다."
+        };
+      }
+
+      switch (stageInfo.plan.key) {
+        case "week1":
+          return {
+            target: 0,
+            label: "이번 주 단식 없음",
+            note: "1주차는 적응 기간이라 식사 리듬부터 만드는 쪽이 더 중요합니다."
+          };
+        case "week2":
+          return {
+            target: 1,
+            label: "권장 1회",
+            note: "2주차부터는 주 1회 24시간 단식을 넣는 흐름입니다."
+          };
+        case "week3":
+          return {
+            target: 2,
+            label: "권장 2회",
+            note: "3주차는 주 2회까지 늘어나지만 연속 단식은 피하는 편이 좋습니다."
+          };
+        case "week4":
+          return {
+            target: 3,
+            label: "권장 3회",
+            note: "4주차는 주 3회까지 가능하지만 단식일 사이에는 일반식을 꼭 넣어 주세요."
+          };
+        default:
+          return {
+            target: 2,
+            label: "권장 1~2회",
+            note: "유지기에는 무리하지 말고 오래 갈 수 있는 강도로 단식 횟수를 조절하면 됩니다."
+          };
+      }
     }
 
     function adjustExerciseCount(delta) {
@@ -2060,6 +2176,30 @@
       els.exerciseSummary.textContent = `이번 주 목표는 4회입니다. 주가 끝날 때까지 ${4 - count}회 남았습니다.`;
     }
 
+    function renderFastingTracker(stageInfo) {
+      const todayLog = getOrCreateTodayLog();
+      const goal = getFastingGoal(stageInfo);
+      const count = getCurrentWeekFastingCount();
+      els.fastingWeekLabel.textContent = `현재 주간 범위: ${getWeekRangeLabel()}`;
+      els.fastingCount.textContent = `${count}회`;
+      els.fastingDayCheck.checked = Boolean(todayLog.checks["fasting-day"]);
+
+      if (goal.target === 0) {
+        els.fastingSummary.textContent = `${goal.label}. ${goal.note}`;
+        els.fastingDayHint.textContent = "1주차에는 단식일 체크보다 식사 시간과 기본 리듬을 먼저 잡는 쪽이 더 잘 맞습니다.";
+        return;
+      }
+
+      const remaining = Math.max(goal.target - count, 0);
+      if (remaining === 0) {
+        els.fastingSummary.textContent = `${goal.label}를 채웠습니다. ${goal.note}`;
+      } else {
+        els.fastingSummary.textContent = `${goal.label}이고 이번 주에 ${remaining}회 더 체크하면 됩니다. ${goal.note}`;
+      }
+
+      els.fastingDayHint.textContent = "단식하는 날에는 오늘 한 번만 체크해 두면 이번 주 누적 횟수에 바로 반영됩니다.";
+    }
+
     function renderCalendar() {
       const { year, month } = calendarCursor;
       const firstDay = new Date(year, month, 1);
@@ -2106,6 +2246,7 @@
     function renderToday() {
       const stageInfo = getStageInfo();
       renderWeekList(stageInfo);
+      renderFastingTracker(stageInfo);
       renderMealChecklist();
       renderFastingSummary();
       renderExerciseTracker();
@@ -2301,6 +2442,14 @@
     els.saveLog.addEventListener("click", saveLog);
     els.fillToday.addEventListener("click", fillTodayFromProfile);
     els.resetAll.addEventListener("click", resetAll);
+    els.fastingDayCheck.addEventListener("change", (event) => {
+      const todayLog = getOrCreateTodayLog();
+      todayLog.checks["fasting-day"] = event.target.checked;
+      saveState();
+      renderToday();
+      renderHistory();
+      renderCalendar();
+    });
     els.exerciseMinus.addEventListener("click", () => adjustExerciseCount(-1));
     els.exercisePlus.addEventListener("click", () => adjustExerciseCount(1));
     els.calendarPrev.addEventListener("click", () => {
