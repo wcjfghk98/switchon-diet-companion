@@ -1003,7 +1003,7 @@
           <p>
             시작일만 정하면 오늘이 몇 주차인지, 어떤 식사 원칙을 지켜야 하는지,
             물과 수면, 공복, 운동 체크까지 한 화면에서 확인할 수 있게 만들었습니다.
-            아이폰에서는 Safari로 연 뒤 홈 화면에 추가하면 작은 앱처럼 바로 쓸 수 있습니다.
+            핵심 3주 루틴을 지키고 4주차에 안정화하는 흐름으로 정리했으며, 아이폰에서는 Safari로 연 뒤 홈 화면에 추가하면 작은 앱처럼 바로 쓸 수 있습니다.
           </p>
           <div class="status-bar">
             <span class="pill">4주 루틴 안내</span>
@@ -1015,7 +1015,7 @@
         <div class="hero-notes">
           <div class="highlight-card">
             <strong>핵심 구조</strong>
-            <span>1주차 적응, 2주차 단식 도입, 3주차 대사 유연성 회복, 4주차 유지 습관화 흐름으로 정리했습니다.</span>
+            <span>1주차 적응, 2주차 단식 도입, 3주차 대사 전환 완성, 4주차 유지 습관화 흐름으로 정리했습니다. 성패가 갈리는 핵심 구간은 3주입니다.</span>
           </div>
           <div class="highlight-card">
             <strong>아이폰 사용 팁</strong>
@@ -1085,7 +1085,7 @@
                 <strong id="miniFocus">-</strong>
               </div>
               <div class="mini-card">
-                <span>권장 리듬</span>
+                <span>이번 주 핵심</span>
                 <strong id="miniRhythm">-</strong>
               </div>
             </div>
@@ -1150,7 +1150,7 @@
               </div>
               <div class="tracker-value" id="exerciseCount">0회</div>
             </div>
-            <p class="tracker-note" id="exerciseSummary">주가 끝날 때 몇 번 했는지 확인하면서 숫자만 맞춰 주세요. 매일 체크하는 방식보다 덜 번거롭게 쓸 수 있습니다.</p>
+            <p class="tracker-note" id="exerciseSummary">주 4~5회가 기본 권장량이고, 유산소를 하더라도 일부는 고강도 인터벌 운동으로 가져가면 효율이 좋습니다.</p>
             <div class="tracker-actions">
               <button class="ghost" id="exerciseMinus" type="button">-1회</button>
               <button class="secondary" id="exercisePlus" type="button">+1회</button>
@@ -1263,7 +1263,7 @@
           <div class="panel-head">
             <div>
               <h2>4주 로드맵</h2>
-              <p>링크 내용을 앱에서 바로 따라가기 쉽게 요약했습니다.</p>
+              <p>핵심은 3주 안에 지방 대사 리듬을 되살리는 것이고, 4주차는 그 흐름을 흔들리지 않게 굳히는 단계로 보면 됩니다.</p>
             </div>
           </div>
 
@@ -1326,6 +1326,16 @@
                 <li>콩류, 견과류, 치즈, 플레인 우유 또는 무가당 두유</li>
                 <li>맑은 국, 된장국 건더기 위주 식사</li>
                 <li>오전 블랙커피 1잔</li>
+              </ul>
+            </div>
+            <div class="food-card">
+              <strong>맛을 살리는 저염 팁</strong>
+              <p>무염까지 갈 필요는 없고, 충분히 먹을 수 있을 만큼 싱겁게 조절하는 쪽이 더 현실적입니다.</p>
+              <ul>
+                <li>소금 대신 저염간장 소량 사용</li>
+                <li>두부를 으깨 넣은 양념장 활용</li>
+                <li>레몬즙, 식초, 후추, 허브로 풍미 보완</li>
+                <li>국물보다는 건더기 위주로 먹기</li>
               </ul>
             </div>
             <div class="food-card">
@@ -1405,6 +1415,16 @@
                 <li>닭다리살 구이(껍질 제거) + 양배추볶음</li>
                 <li>순두부찌개 건더기 위주 + 계란 추가</li>
                 <li>새우, 버섯, 브로콜리 볶음 + 두부</li>
+              </ul>
+            </div>
+            <div class="food-card">
+              <strong>쉐이크를 덜 질리게 먹는 법</strong>
+              <p>단백질 섭취를 끼니마다 챙기기 어려울 때 현실적으로 이어가기 위한 도구처럼 쓰면 편합니다.</p>
+              <ul>
+                <li>얼음과 함께 갈아 더 차갑게 마시기</li>
+                <li>계피가루나 무가당 코코아가루 아주 소량 추가</li>
+                <li>무가당 그릭요거트와 섞어 푸딩처럼 먹기</li>
+                <li>단식 다음 날 아침 회복식으로 가볍게 시작하기</li>
               </ul>
             </div>
           </div>
@@ -1487,8 +1507,8 @@
         title: "1주차",
         period: "1~7일",
         focus: "적응과 전환",
-        rhythm: "첫 3일은 강하게, 이후는 점심 보완",
-        summary: "몸을 다이어트 모드로 돌리는 시기입니다. 초반에는 단백질 쉐이크 중심으로 가볍게 가고, 4일차부터는 점심 저탄수 식사를 더합니다.",
+        rhythm: "첫 3일 적응, 4일차부터 점심 일반식 보완",
+        summary: "몸이 지방을 에너지원으로 다시 쓰기 시작하도록 적응하는 시기입니다. 초반에는 단백질 쉐이크 중심으로 가고, 4일차부터는 점심 저탄수 일반식을 더합니다.",
         chips: ["1~3일 쉐이크 4회", "4~7일 쉐이크 3회", "점심 저탄수 식사", "녹황색 채소·두부·무가당 요거트"],
       },
       {
@@ -1497,16 +1517,16 @@
         period: "8~14일",
         focus: "단식 도입",
         rhythm: "주 1회 24시간 단식",
-        summary: "체지방 감량이 본격화되는 구간입니다. 하루 2번 쉐이크와 일반식 2끼로 가며, 주 1회 24시간 단식을 넣습니다.",
+        summary: "지방 대사의 문이 어느 정도 열렸다고 보고 간헐적 단식을 시작하는 구간입니다. 하루 2번 쉐이크와 일반식 2끼로 가며, 주 1회 24시간 단식을 넣습니다.",
         chips: ["주 1회 24시간 단식", "쉐이크 2회 + 일반식 2끼", "저녁 저탄수", "오전 블랙커피 1잔 가능"],
       },
       {
         key: "week3",
         title: "3주차",
         period: "15~21일",
-        focus: "대사 유연성 회복",
+        focus: "대사 전환 완성",
         rhythm: "주 2회 단식, 연속 금지",
-        summary: "단식 횟수가 늘어나지만 연속 단식은 피합니다. 단식 후 고단백 식사를 챙기고, 운동량이 많으면 바나나나 고구마로 보완할 수 있습니다.",
+        summary: "스위치온의 성패가 갈리는 핵심 구간입니다. 단식 횟수는 늘어나지만 연속 단식은 피하고, 단식 후에는 고단백 회복식으로 리듬을 안정적으로 이어갑니다.",
         chips: ["주 2회 24시간 단식", "연속 단식 금지", "고단백 회복식", "단호박·토마토·바나나·베리 허용"],
       },
       {
@@ -1514,8 +1534,8 @@
         title: "4주차",
         period: "22~28일",
         focus: "유지 습관화",
-        rhythm: "주 3회 단식, 사이 일반식 필수",
-        summary: "마지막 주는 새 식습관을 굳히는 단계입니다. 점심과 저녁은 계속 저탄수로 관리하고, 단식일 사이에 일반식을 넣어 균형을 맞춥니다.",
+        rhythm: "흐름 유지, 실수해도 다시 복귀",
+        summary: "마지막 주는 새 식습관을 굳히는 단계입니다. 3주를 잘 지켰다면 약간의 실수가 있어도 실패 확률이 낮아지는 구간이라, 점심과 저녁 저탄수 원칙만 다시 잡아주면 됩니다.",
         chips: ["주 3회 24시간 단식", "과일 하루 1개", "점심·저녁 저탄수", "단식일 사이 일반식 필수"],
       },
       {
@@ -2262,12 +2282,17 @@
       const count = getCurrentWeekExerciseCount();
       els.exerciseWeekLabel.textContent = `현재 주간 범위: ${getWeekRangeLabel()}`;
       els.exerciseCount.textContent = `${count}회`;
-      if (count >= 4) {
-        els.exerciseSummary.textContent = "이번 주 목표 운동 횟수를 채웠습니다. 더 했다면 그대로 숫자만 추가해 두셔도 됩니다.";
+      if (count >= 5) {
+        els.exerciseSummary.textContent = "이번 주 권장 운동량을 넉넉히 채웠습니다. 고강도 인터벌과 유산소를 무리 없이 섞어 간 흐름이라면 아주 좋습니다.";
         return;
       }
 
-      els.exerciseSummary.textContent = `이번 주 목표는 4회입니다. 주가 끝날 때까지 ${4 - count}회 남았습니다.`;
+      if (count >= 4) {
+        els.exerciseSummary.textContent = "이번 주 기본 권장량 4회는 채웠습니다. 가능하면 1회 정도는 고강도 인터벌 운동으로 더해 보세요.";
+        return;
+      }
+
+      els.exerciseSummary.textContent = `이번 주 기본 권장량은 4~5회입니다. 지금 ${count}회 했고, 최소 4회까지 ${4 - count}회 남았습니다.`;
     }
 
     function renderFastingTracker(stageInfo) {
@@ -2360,10 +2385,10 @@
         const daysLeft = Math.abs(stageInfo.dayNumber) + 1;
         els.todayBadge.textContent = "시작 전";
         els.todayHeadline.textContent = `${daysLeft}일 뒤 시작 예정입니다. 준비 루틴을 먼저 가볍게 잡아두세요.`;
-        els.todaySummary.textContent = "물과 수면, 아침·점심·간식·저녁 시간대를 먼저 일정하게 맞춰 두면 초반 적응이 조금 더 편해질 수 있습니다.";
+        els.todaySummary.textContent = "물과 수면, 아침·점심·간식·저녁 시간대를 먼저 일정하게 맞춰 두고, 가능하면 깨어 있는 시간 중 10시간 안에 식사를 마치는 연습을 해 보세요.";
         els.miniStage.textContent = "준비 단계";
         els.miniFocus.textContent = "물·수면 정리";
-        els.miniRhythm.textContent = "시작 전 워밍업";
+        els.miniRhythm.textContent = "식사 시간대 먼저 고정";
         return;
       }
 
