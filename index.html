@@ -227,6 +227,7 @@
     .field {
       display: grid;
       gap: 8px;
+      min-width: 0;
     }
 
     .field label {
@@ -238,6 +239,8 @@
     .field input,
     .field textarea {
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
       padding: 14px 15px;
@@ -266,12 +269,14 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 16px;
+      min-width: 0;
     }
 
     button {
       border: 0;
       border-radius: 999px;
       padding: 12px 18px;
+      max-width: 100%;
       font: inherit;
       font-weight: 700;
       cursor: pointer;
@@ -296,6 +301,14 @@
       background: rgba(255, 255, 255, 0.72);
       color: var(--muted);
       border: 1px solid var(--line);
+    }
+
+    input[type="date"],
+    input[type="number"],
+    input[type="text"],
+    input[type="time"] {
+      -webkit-appearance: none;
+      appearance: none;
     }
 
     .status-bar {
@@ -956,6 +969,26 @@
 
       .hero h1 {
         font-size: clamp(2rem, 10vw, 3rem);
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions button,
+      .tracker-actions button,
+      .calendar-nav button {
+        width: 100%;
+      }
+
+      .calendar-nav {
+        width: 100%;
+      }
+
+      .field input,
+      .field textarea,
+      .meal-card .time-field input {
+        font-size: 16px;
       }
     }
   </style>
